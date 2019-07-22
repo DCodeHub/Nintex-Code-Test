@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CustomerPhoneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="CustomerPhone">
+    <Key>
+      <PropertyRef Name="phoneId" />
+    </Key>
+    <Property Name="phoneId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customerId" Type="Int32" Nullable="false" />
+    <Property Name="customerPhone" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="phoneStaus" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="phoneDesc" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="CustomerPhoneEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="CustomerPhones" EntityType="Self.CustomerPhone" />
+    <FunctionImport Name="GetAllPhoneNumbers" ReturnType="Collection(CustomerPhoneModel.GetAllPhoneNumbers_Result)" />
+  </EntityContainer>
+  <ComplexType Name="GetAllPhoneNumbers_Result">
+    <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="customerPhone" Nullable="true" MaxLength="40" />
+  </ComplexType>
+</Schema>

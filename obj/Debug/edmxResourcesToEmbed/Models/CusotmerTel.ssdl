@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CustomerDetailsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\DURGAD\SOURCE\REPOS\APIFORCUSTOMERTELEPHONE\APIFORCUSTOMERTELEPHONE\APP_DATA\CUSTOMERDETAILS.MDF.dbo.CustomerPhone' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CustomerPhone">
+    <Key>
+      <PropertyRef Name="customerId" />
+      <PropertyRef Name="PhoneNumber" />
+    </Key>
+    <Property Name="customerId" Type="int" Nullable="false" />
+    <Property Name="PhoneNumber" Type="int" Nullable="false" />
+    <Property Name="phoneStatus" Type="char" MaxLength="1" />
+    <Property Name="phoneDescription" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <Function Name="ActivatePhoneNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="customerid" Type="int" Mode="In" />
+    <Parameter Name="phoneNumber" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllPhoneNumbers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="InsertCustomerPhone" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="customerName" Type="varchar" Mode="In" />
+    <Parameter Name="customerAddress" Type="varchar" Mode="In" />
+    <Parameter Name="phoneNumer" Type="int" Mode="In" />
+    <Parameter Name="status" Type="char" Mode="In" />
+    <Parameter Name="Desc" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Procedure" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="customerId" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="CustomerDetailsModelStoreContainer">
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CustomerPhone" EntityType="Self.CustomerPhone" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CustomerPhone].[customerId] AS [customerId], 
+    [CustomerPhone].[PhoneNumber] AS [PhoneNumber], 
+    [CustomerPhone].[phoneStatus] AS [phoneStatus], 
+    [CustomerPhone].[phoneDescription] AS [phoneDescription]
+    FROM [dbo].[CustomerPhone] AS [CustomerPhone]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

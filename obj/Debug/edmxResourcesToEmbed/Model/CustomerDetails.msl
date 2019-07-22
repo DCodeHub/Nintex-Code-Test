@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CustomerPhoneModelStoreContainer" CdmEntityContainer="CustomerPhoneEntities">
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="CustomerPhoneModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerPhones">
+      <EntityTypeMapping TypeName="CustomerPhoneModel.CustomerPhone">
+        <MappingFragment StoreEntitySet="CustomerPhone">
+          <ScalarProperty Name="phoneId" ColumnName="phoneId" />
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="customerPhone" ColumnName="customerPhone" />
+          <ScalarProperty Name="phoneStaus" ColumnName="phoneStaus" />
+          <ScalarProperty Name="phoneDesc" ColumnName="phoneDesc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetAllPhoneNumbers" FunctionName="CustomerPhoneModel.Store.GetAllPhoneNumbers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CustomerPhoneModel.GetAllPhoneNumbers_Result">
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="customerPhone" ColumnName="customerPhone" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

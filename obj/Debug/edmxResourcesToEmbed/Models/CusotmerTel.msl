@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CustomerDetailsModelStoreContainer" CdmEntityContainer="CustomerDetailsEntities">
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="CustomerDetailsModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerPhones">
+      <EntityTypeMapping TypeName="CustomerDetailsModel.CustomerPhone">
+        <MappingFragment StoreEntitySet="CustomerPhone">
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="phoneStatus" ColumnName="phoneStatus" />
+          <ScalarProperty Name="phoneDescription" ColumnName="phoneDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ActivatePhoneNumber" FunctionName="CustomerDetailsModel.Store.ActivatePhoneNumber" />
+    <FunctionImportMapping FunctionImportName="GetAllPhoneNumbers" FunctionName="CustomerDetailsModel.Store.GetAllPhoneNumbers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CustomerDetailsModel.GetAllPhoneNumbers_Result">
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="phoneStatus" ColumnName="phoneStatus" />
+          <ScalarProperty Name="phoneDescription" ColumnName="phoneDescription" />
+          <ScalarProperty Name="CustomerId1" ColumnName="CustomerId1" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertCustomerPhone" FunctionName="CustomerDetailsModel.Store.InsertCustomerPhone" />
+    <FunctionImportMapping FunctionImportName="Procedure" FunctionName="CustomerDetailsModel.Store.Procedure">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CustomerDetailsModel.Procedure_Result">
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="phoneStatus" ColumnName="phoneStatus" />
+          <ScalarProperty Name="phoneDescription" ColumnName="phoneDescription" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

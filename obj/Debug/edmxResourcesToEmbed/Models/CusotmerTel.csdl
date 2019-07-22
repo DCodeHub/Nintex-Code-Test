@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CustomerDetailsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="CustomerPhone">
+    <Key>
+      <PropertyRef Name="customerId" />
+      <PropertyRef Name="PhoneNumber" />
+    </Key>
+    <Property Name="customerId" Type="Int32" Nullable="false" />
+    <Property Name="PhoneNumber" Type="Int32" Nullable="false" />
+    <Property Name="phoneStatus" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="phoneDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="CustomerDetailsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="CustomerPhones" EntityType="Self.CustomerPhone" />
+    <FunctionImport Name="ActivatePhoneNumber">
+      <Parameter Name="customerid" Mode="In" Type="Int32" />
+      <Parameter Name="phoneNumber" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllPhoneNumbers" ReturnType="Collection(CustomerDetailsModel.GetAllPhoneNumbers_Result)" />
+    <FunctionImport Name="InsertCustomerPhone">
+      <Parameter Name="customerName" Mode="In" Type="String" />
+      <Parameter Name="customerAddress" Mode="In" Type="String" />
+      <Parameter Name="phoneNumer" Mode="In" Type="Int32" />
+      <Parameter Name="status" Mode="In" Type="String" />
+      <Parameter Name="Desc" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Procedure" ReturnType="Collection(CustomerDetailsModel.Procedure_Result)">
+      <Parameter Name="customerId" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="GetAllPhoneNumbers_Result">
+    <Property Type="Int32" Name="customerId" Nullable="false" />
+    <Property Type="Int32" Name="PhoneNumber" Nullable="false" />
+    <Property Type="String" Name="phoneStatus" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="phoneDescription" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="CustomerId1" Nullable="false" />
+    <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="Procedure_Result">
+    <Property Type="Int32" Name="customerId" Nullable="false" />
+    <Property Type="Int32" Name="PhoneNumber" Nullable="false" />
+    <Property Type="String" Name="phoneStatus" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="phoneDescription" Nullable="true" MaxLength="100" />
+  </ComplexType>
+</Schema>
