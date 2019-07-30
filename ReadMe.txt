@@ -5,3 +5,5 @@
 5. The API Can be tested and by the Swagger. To view that http://localhost:50298/swagger.
 
 This will display all the required operations. The input and output can be viewed with comments there.
+If i have added the controllres from MVC as well. 
+Please use any one of the options to consume the API.
